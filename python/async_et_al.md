@@ -67,10 +67,10 @@ def tally():
     for _ in range(5):
         x = yield "got it"
         sum += x
-        return sum
+    return sum
         
 def pipe():
-    x = tally()
+    x = yield from tally()
     print("Sum is %s" % x)
     
 val = pipe()
@@ -92,8 +92,17 @@ a distinct type in the language, as opposed to an interface similar to generator
 
 ### How asyncio improves performance
 
-It's clear that by `yield`ing often enough within coroutines can
-provide responsiveness. In order to improve *performance* for IO bound, single-threaded code, such code needs to never block on IO operations. The socket reader code in asyncio use the `socket` library for low-level data exchange, which has a nonblocking API. So the asyncio coroutines poll the socket object for the presence of data and, while it's not yet available, do the equivalent of `yield sleep()`. Presumably `socket` releases the GIL (and perhaps communciates with the network in a separate thread) to achieve this nonblocking behavior.
+It's clear that `yield`ing often enough within coroutines can
+provide responsiveness. In order to improve *performance* for IO bound, single-threaded code, such code needs to never block on IO operations. The socket reader code in asyncio use the `socket` library for low-level data exchange, which has a nonblocking API. So the asyncio coroutines poll the socket object for the presence of data and, while it's not yet available, do the equivalent of `yield sleep()`. Roughly it looks like this:
+
+```
+async def get_data():
+    if sock.has_data():
+        return sock.get_data()
+    yield from asyncio.sleep()
+```
+
+I suspect that `socket` might internally communicate with the network in a separate GIL-released thread to facilitate this.
 
 ### References
 
