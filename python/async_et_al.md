@@ -2,9 +2,9 @@
 
 Here's some clarity on the distinctions between several python constructs:
 
- * An **iterator** is an interface for producing a sequence of values
- * A **generator** implements the iterator interface by lazily "yield"ing values from a function. This has the effect of repeatedly suspending function execution mid-body, and returning intermediate results.
- * **Coroutines** are like generators, but the flow of data is bidirectional; coroutines send data out when they yield, and callers send data back in when they resume the coroutine.
+ * An **iterator** is an interface for producing a sequence of values.
+ * A **generator** implements the iterator interface by lazily `yield`ing values from a function. This has the effect of repeatedly suspending function execution mid-body, and returning intermediate results.
+ * **Coroutines** are like generators, but the flow of data is bidirectional; coroutines send data out when they `yield`, and callers `send` data back in when they resume the coroutine.
 * **asyncio** is a module in the standard library that uses coroutines as the building blocks for asynchronous code. **[Cooperative multitasking](https://en.wikipedia.org/wiki/Cooperative_multitasking)** is the concurrency paradigm behind asyncio -- the event loop does not preemtively steal execution from any coroutine, but instead waits for the coroutine to yield before switching to another task. Note that this means that asyncio programs are not responsive for free -- they are only responsive if tasks yield frequently enough, and don't do substantial work between yield methods.
 
 Asyncio coroutines yield data structures that the event loop introspects to control context switching. For example in this example
@@ -87,8 +87,8 @@ In asyncio coroutines communicate with the event loop by `yield from`ing Futures
 
 ### What does async/await provide
 
-`async def` as added in Python 3.5 to make coroutines
-a distinct type in the language, as opposed to an interface similar to generators (at the language level, there's no way to distinguish a coroutine from a generator in <=3.4). This provides some type checking utilities, as well as support for some extra language constructs (async for, async with, etc). In a 3.5 coroutine `await` replaces `yield from`. 
+`async def` was added in Python 3.5 to make coroutines
+a distinct type in the language (at the language level, there's no way to distinguish a coroutine from a generator in <=3.4). This provides some type checking utilities, as well as support for some extra language constructs (async for, async with, etc). In a 3.5 coroutine `await` replaces `yield from`. Just like how the `@contextmanager` decorator can durn a generator into a context manager, the `@types.coroutine` decorator turns a 3.4-style "coroutine-via-generator" function into a formal coroutine object. 
 
 ### How asyncio improves performance
 
