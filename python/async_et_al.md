@@ -2,7 +2,7 @@
 
 Here's some clarity on the distinctions between several python constructs:
 
- * In **iterator** is an interface for producing a sequence of values
+ * An **iterator** is an interface for producing a sequence of values
  * A **generator** implements the iterator interface by lazily "yield"ing values from a function. This has the effect of repeatedly suspending function execution mid-body, and returning intermediate results.
  * **Coroutines** are like generators, but the flow of data is bidirectional; coroutines send data out when they yield, and callers send data back in when they resume the coroutine.
 * **asyncio** is a module in the standard library that uses coroutines as the building blocks for asynchronous code. **[Cooperative multitasking](https://en.wikipedia.org/wiki/Cooperative_multitasking)** is the concurrency paradigm behind asyncio -- the event loop does not preemtively steal execution from any coroutine, but instead waits for the coroutine to yield before switching to another task. Note that this means that asyncio programs are not responsive for free -- they are only responsive if tasks yield frequently enough, and don't do substantial work between yield methods.
