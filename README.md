@@ -5,6 +5,7 @@
 ### Categories
 
 * [Databases](#databases)
+* [Python](#python)
 
 ---
 
@@ -12,6 +13,12 @@
 
 * [Select exterme rows within groups](db/group_extrema.md)
 
+
+---
+
+### Python
+
+* [Async, await, coroutines, etc](python/async_et_al.md)
 
 ---
 
