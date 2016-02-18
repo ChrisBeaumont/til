@@ -20,6 +20,7 @@
 
 * [Async, await, coroutines, etc](python/async_et_al.md)
 * [Vulture for dead code detection](python/vulture.md)
+* [Records for minimalist SQL querying](python/records.md)
 
 ---
 
