@@ -24,6 +24,12 @@
 
 ---
 
+### Unix
+
+ * [The correct way to set the default shell](unix/default_shell.md)
+
+---
+
 ### About
 
 Idea courtesy https://github.com/jbranchaud/til, courtesy https://github.com/thoughtbot/til
