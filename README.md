@@ -24,6 +24,12 @@
 
 ---
 
+### Scala
+
+ * [case class copying](scala/case_class_copy.md)
+
+---
+
 ### Unix
 
  * [The correct way to set the default shell](unix/default_shell.md)
