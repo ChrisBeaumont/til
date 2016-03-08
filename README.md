@@ -27,6 +27,7 @@
 ### Scala
 
  * [case class copying](scala/case_class_copy.md)
+ * [Specifying implicits in generic functions](scala/generic_implicits.md)
 
 ---
 
