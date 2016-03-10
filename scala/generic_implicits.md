@@ -55,3 +55,25 @@ The main difference is that, in the first function, the `JsonWriter` is
 resolved to a reference when the function is called (and no such `JsonWriter[Base]` exists). In the second function,
 the `JsonWriter` and `T` are resolved separately at each `generic_go` call
 site.
+
+`generic_go` can be further compacted by using a context bound:
+
+```
+def generic_go2[T <: Base : JsonWriter](t: T) =
+  t.toJson
+
+import JsonSerializers._
+generic_go(Foo(1))
+```
+
+This means the same thing as defining the `implicit` parameter explicitly. If
+you needed to access the implicit value within the function, you need to use `implicitly`:
+
+```
+def generic_go3[T <: Base : JsonWriter](t: T) = {
+  implicitly[JsonWriter[T]] write t
+}
+```
+
+
+
