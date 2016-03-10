@@ -5,8 +5,6 @@ Spray-json looks for an implicit `JsonWriter[T]` when calling
 
 
 ```
-import spray.json._
-
 trait Base
 case class Foo(x: Int) extends Base
 object JsonSerializers extends DefaultJsonProtocol {
@@ -17,7 +15,7 @@ def go(f: Foo) = {
   import JsonSerializers._
   f.toJson
 }
-go(Foo(1))   # res0: spray.json.JsValue = {"x":1}
+go(Foo(1))   // res0: spray.json.JsValue = {"x":1}
 ```
 
 Here `FooFormat` is the required implicit value that scala needed.
